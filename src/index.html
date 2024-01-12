@@ -19,8 +19,8 @@
     />
   </head>
   <body class="bg-success">
-    <div class="d-flex flex-row ms-3 mt-3 ">
-      <div class="col-auto">
+    <div class="d-flex flex-row ms-3 mt-3">
+      <div class="col-auto" id="form">
         <label for="númerosDeCartas" class="col-form-label">
           <p class="fw-bold">Cantidad de Cartas:</p>
         </label>
@@ -28,20 +28,22 @@
       <div class="col-1 ms-2">
         <input
           type="number"
-          id="númerosDeCartas"
+          id="cantidad-cartas"
           class="form-control"
+          min="1"
+          max="10"
           aria-describedby="passwordHelpInline"
         />
       </div>
       <div>
-        <button class="ms-2">Draw</button>
+        <button class="ms-2" id="draw">Draw</button>
       </div>
       <div>
-        <button>Sort</button>
+        <button id="sort">Sort</button>
       </div>
     </div>
     <!-- Espacio a considerar cuando  de generen las cartas-->
-    <div class="container-fluid d-flex" id="mostrarCartas">
+    <div class="container-fluid d-flex" id="mostrar-cartas">
       <!--  
       <div class="card">
         <div class="card-body">
