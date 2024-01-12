@@ -21,9 +21,9 @@
   <body class="bg-success">
     <div class="d-flex flex-row ms-3 mt-3 ">
       <div class="col-auto">
-        <label for="númerosDeCartas" class="col-form-label"
-          ><p class="fw-bold">Indique Cantidad de Cartas:</p></label
-        >
+        <label for="númerosDeCartas" class="col-form-label">
+          <p class="fw-bold">Cantidad de Cartas:</p>
+        </label>
       </div>
       <div class="col-1 ms-2">
         <input
@@ -40,18 +40,16 @@
         <button>Sort</button>
       </div>
     </div>
-    <div class="row ms-3 bg-danger" id="mostrarCartas">
-      <div class="col-2">
-        <div class="card w-25">
-          <div class="card-body">
-            <span>♦</span>
-            <p class="card-text">
-              6
-            </p>
-            <a href="#" class="btn btn-primary">Button</a>
-          </div>
+    <!-- Espacio a considerar cuando  de generen las cartas-->
+    <div class="container-fluid d-flex" id="mostrarCartas">
+      <!--  
+      <div class="card">
+        <div class="card-body">
+          <div class="position-absolute top-0 start-0" id="palo-superior">♦</div>
+          <div id="número-central">10</div>
+          <div class="position-absolute bottom-0 end-0" id="palo-inferiror">♦</div>
         </div>
-      </div>
+      </div>-->
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
