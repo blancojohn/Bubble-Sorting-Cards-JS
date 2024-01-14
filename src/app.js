@@ -10,11 +10,41 @@ window.onload = function() {
   console.log("Hello Rigo from the console!");
 };
 */
-let cartas = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let números = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K"
+];
 let palos = ["♦", "♥", "♠", "♣"];
 
 let botónDraw = document.querySelector("#draw");
-botónDraw.addEventListener("click", generarCartas);
+
+botónDraw.addEventListener("click", drawCartas);
+
+function drawCartas() {
+  let inputNúmero = document.querySelector("#input-número");
+  let inputNúmeroValue = inputNúmero.value;
+  let i = 1;
+  let arrayDeCartas = [];
+  while (i++ <= inputNúmeroValue) {
+    arrayDeCartas.push(generarCartas());
+  }
+}
+
+let drawDesactivado = function() {
+  this.disabled = true;
+};
+botónDraw.addEventListener("click", drawDesactivado, false);
 
 function generarCartas() {
   let mostrarCartas = document.querySelector("#mostrar-cartas");
@@ -27,20 +57,34 @@ function generarCartas() {
 
   let paloSuperior = document.createElement("div");
   paloSuperior.classList.add("position-absolute", "top-0", "start-0");
-  paloSuperior.innerHTML = "♦";
+  let palosRandom = Math.floor(Math.random() * palos.length);
+  let palo = palos[palosRandom];
+  paloSuperior.innerHTML = palo;
 
   let númeroCentral = document.createElement("div");
-  númeroCentral.innerHTML = "6";
+  let númeroRandom = Math.floor(Math.random() * números.length);
+  let número = números[númeroRandom];
+  númeroCentral.innerHTML = número;
 
   let paloInferior = document.createElement("div");
   paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
-  paloInferior.innerHTML = "♦";
+  paloInferior.innerHTML = palo;
 
   mostrarCartas.appendChild(carta);
   carta.appendChild(cardBody);
   cardBody.appendChild(paloSuperior);
   cardBody.appendChild(númeroCentral);
   cardBody.appendChild(paloInferior);
+
+  if (palo == "♦" || palo == "♥") {
+    paloSuperior.style.color = "red";
+    paloInferior.style.color = "red";
+    númeroCentral.style.color = "red";
+  } else {
+    paloSuperior.style.color = "black";
+    paloInferior.style.color = "black";
+    númeroCentral.style.color = "black";
+  }
 
   console.log("soy la carta");
 }
