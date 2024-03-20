@@ -26,27 +26,29 @@ let números = [
   "K"
 ];
 let palos = ["♦", "♥", "♠", "♣"];
+let cartasDesordenadas = [];
+
+/* let drawDesactivado = function() {
+  this.disabled = true;
+};
+botónDraw.addEventListener("click", drawDesactivado, false); */
 
 let botónDraw = document.querySelector("#draw");
 
-botónDraw.addEventListener("click", drawCartas);
-
 function drawCartas() {
-  let inputNúmero = document.querySelector("#input-número");
-  let inputNúmeroValue = inputNúmero.value;
-  let i = 1;
-  let arrayDeCartas = [];
-  while (i++ <= inputNúmeroValue) {
-    arrayDeCartas.push(generarCartas());
+  /* captura el valor pasado por el input */
+  cartasDesordenadas = [];
+  let inputNumber = document.querySelector("#input-número");
+  let inputNumberValue = inputNumber.value;
+  console.log("Input pasado", inputNumberValue);
+  for (let i = 1; i <= inputNumberValue; i++) {
+    cartasDesordenadas.push(generarCartas());
   }
+  console.log("Recibo:", cartasDesordenadas);
 }
 
-let drawDesactivado = function() {
-  this.disabled = true;
-};
-botónDraw.addEventListener("click", drawDesactivado, false);
-
 function generarCartas() {
+  /*  Dibuja las cartas según valor pasado en el input */
   let mostrarCartas = document.querySelector("#mostrar-cartas");
 
   let carta = document.createElement("div");
@@ -76,6 +78,13 @@ function generarCartas() {
   cardBody.appendChild(númeroCentral);
   cardBody.appendChild(paloInferior);
 
+  let objetoCarta = {
+    palo: palo,
+    número: número,
+    palo: palo
+  };
+  console.log(objetoCarta);
+
   if (palo == "♦" || palo == "♥") {
     paloSuperior.style.color = "red";
     paloInferior.style.color = "red";
@@ -88,3 +97,23 @@ function generarCartas() {
 
   console.log("soy la carta");
 }
+
+botónDraw.addEventListener("click", drawCartas);
+
+/* function sort(arr = []) {
+  const len = arr.length;
+  for (let i = 0; i < len - 1; i++) {
+    for (let j = 0; j < len - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        const temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr;
+}
+let result = sort([...números]);
+console.log("Método Bubble Sorting", result);
+console.log("cartas sin ordenar", números);
+ */
