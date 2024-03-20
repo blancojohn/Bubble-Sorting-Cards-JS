@@ -4,12 +4,7 @@ import "./style.css";
 
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
-/*
-window.onload = function() {
-  //write your code here
-  console.log("Hello Rigo from the console!");
-};
-*/
+
 let números = [
   "A",
   "2",
@@ -28,27 +23,30 @@ let números = [
 let palos = ["♦", "♥", "♠", "♣"];
 let cartasDesordenadas = [];
 
-/* let drawDesactivado = function() {
-  this.disabled = true;
-};
-botónDraw.addEventListener("click", drawDesactivado, false); */
-
 let botónDraw = document.querySelector("#draw");
 
-function drawCartas() {
-  /* captura el valor pasado por el input */
+/* captura el valor pasado por el input */
+function generaInputCartas() {
   cartasDesordenadas = [];
   let inputNumber = document.querySelector("#input-número");
   let inputNumberValue = inputNumber.value;
   console.log("Input pasado", inputNumberValue);
+
   for (let i = 1; i <= inputNumberValue; i++) {
     cartasDesordenadas.push(generarCartas());
   }
-  console.log("Recibo:", cartasDesordenadas);
+
+  console.log("Hay:", cartasDesordenadas, "cartas");
+  return cartasDesordenadas;
 }
 
+let drawDesactivado = function() {
+  this.disabled = true;
+};
+botónDraw.addEventListener("click", drawDesactivado, false);
+
+/* Dibuja las cartas */
 function generarCartas() {
-  /*  Dibuja las cartas según valor pasado en el input */
   let mostrarCartas = document.querySelector("#mostrar-cartas");
 
   let carta = document.createElement("div");
@@ -80,10 +78,8 @@ function generarCartas() {
 
   let objetoCarta = {
     palo: palo,
-    número: número,
-    palo: palo
+    número: número
   };
-  console.log(objetoCarta);
 
   if (palo == "♦" || palo == "♥") {
     paloSuperior.style.color = "red";
@@ -94,11 +90,10 @@ function generarCartas() {
     paloInferior.style.color = "black";
     númeroCentral.style.color = "black";
   }
-
-  console.log("soy la carta");
+  return objetoCarta;
 }
 
-botónDraw.addEventListener("click", drawCartas);
+botónDraw.addEventListener("click", generaInputCartas);
 
 /* function sort(arr = []) {
   const len = arr.length;
