@@ -5,21 +5,7 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-let números = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13"
-];
+let números = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 let palos = ["♦", "♥", "♠", "♣"];
 let cartasDesordenadas = [];
 let botónDraw = document.querySelector("#draw");
@@ -129,6 +115,7 @@ function ordenaCartas() {
         paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
         paloInferior.innerHTML = cartasDesordenadas[x].palo;
 
+        cartasOrdenadas.appendChild(contenedor);
         contenedor.appendChild(cartaEnOrden);
         cartaEnOrden.appendChild(cardBody);
         cardBody.appendChild(paloSuperior);
@@ -148,24 +135,20 @@ function ordenaCartas() {
           númeroCentral.style.color = "black";
         }
       }
-      cartasOrdenadas.appendChild(contenedor);
     }
-
-    /*let contenedor = document.createElement("div");
-    contenedor.style.display = "flex";*/
   }
   console.log("cartas ordenadas", cartasDesordenadas);
 }
 
 function changeValiu(value) {
   switch (value) {
-    case "1":
+    case 1:
       return "A";
-    case "11":
+    case 11:
       return "J";
-    case "12":
+    case 12:
       return "Q";
-    case "13":
+    case 13:
       return "K";
 
     default:
