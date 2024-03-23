@@ -5,7 +5,7 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-let números = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 let palos = ["♦", "♥", "♠", "♣"];
 let cartasDesordenadas = [];
 let botónDraw = document.querySelector("#draw");
@@ -13,7 +13,7 @@ let botónDraw = document.querySelector("#draw");
 /* captura el valor pasado por el input */
 function generaInputCartas() {
   cartasDesordenadas = [];
-  let inputNumber = document.querySelector("#input-número");
+  let inputNumber = document.querySelector("#input-number");
   let inputNumberValue = inputNumber.value;
   console.log("Input pasado", inputNumberValue, "cartas");
 
@@ -45,10 +45,10 @@ function generarCartas() {
   let palo = palos[palosRandom];
   paloSuperior.innerHTML = palo;
 
-  let númeroCentral = document.createElement("div");
-  let númeroRandom = Math.floor(Math.random() * números.length);
-  let número = changeValiu(números[númeroRandom]);
-  númeroCentral.innerHTML = número;
+  let numberCentral = document.createElement("div");
+  let numberRandom = Math.floor(Math.random() * numbers.length);
+  let number = numbers[numberRandom];
+  numberCentral.innerHTML = changeValiu(number);
 
   let paloInferior = document.createElement("div");
   paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
@@ -57,22 +57,22 @@ function generarCartas() {
   mostrarCartas.appendChild(carta);
   carta.appendChild(cardBody);
   cardBody.appendChild(paloSuperior);
-  cardBody.appendChild(númeroCentral);
+  cardBody.appendChild(numberCentral);
   cardBody.appendChild(paloInferior);
 
   let objetoCarta = {
     palo: palo,
-    número: número
+    number: number
   };
 
   if (palo == "♦" || palo == "♥") {
     paloSuperior.style.color = "red";
     paloInferior.style.color = "red";
-    númeroCentral.style.color = "red";
+    numberCentral.style.color = "red";
   } else {
     paloSuperior.style.color = "black";
     paloInferior.style.color = "black";
-    númeroCentral.style.color = "black";
+    numberCentral.style.color = "black";
   }
   return objetoCarta;
 }
@@ -92,7 +92,7 @@ function ordenaCartas() {
 
       contenedor.classList.add("d-flex");
 
-      if (cartasDesordenadas[j].número > cartasDesordenadas[j + 1].número) {
+      if (cartasDesordenadas[j].number > cartasDesordenadas[j + 1].number) {
         const temp = cartasDesordenadas[j];
         cartasDesordenadas[j] = cartasDesordenadas[j + 1];
         cartasDesordenadas[j + 1] = temp;
@@ -108,8 +108,8 @@ function ordenaCartas() {
         paloSuperior.classList.add("position-absolute", "top-0", "start-0");
         paloSuperior.innerHTML = cartasDesordenadas[x].palo;
 
-        let númeroCentral = document.createElement("div");
-        númeroCentral.innerHTML = changeValiu(cartasDesordenadas[x].número);
+        let numberCentral = document.createElement("div");
+        numberCentral.innerHTML = changeValiu(cartasDesordenadas[x].number);
 
         let paloInferior = document.createElement("div");
         paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
@@ -119,7 +119,7 @@ function ordenaCartas() {
         contenedor.appendChild(cartaEnOrden);
         cartaEnOrden.appendChild(cardBody);
         cardBody.appendChild(paloSuperior);
-        cardBody.appendChild(númeroCentral);
+        cardBody.appendChild(numberCentral);
         cardBody.appendChild(paloInferior);
 
         if (
@@ -128,18 +128,17 @@ function ordenaCartas() {
         ) {
           paloSuperior.style.color = "red";
           paloInferior.style.color = "red";
-          númeroCentral.style.color = "red";
+          numberCentral.style.color = "red";
         } else {
           paloSuperior.style.color = "black";
           paloInferior.style.color = "black";
-          númeroCentral.style.color = "black";
+          numberCentral.style.color = "black";
         }
       }
     }
   }
   console.log("cartas ordenadas", cartasDesordenadas);
 }
-
 function changeValiu(value) {
   switch (value) {
     case 1:
