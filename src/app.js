@@ -5,10 +5,23 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-let números = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+let números = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13"
+];
 let palos = ["♦", "♥", "♠", "♣"];
 let cartasDesordenadas = [];
-let orden = [];
 let botónDraw = document.querySelector("#draw");
 
 /* captura el valor pasado por el input */
@@ -48,7 +61,7 @@ function generarCartas() {
 
   let númeroCentral = document.createElement("div");
   let númeroRandom = Math.floor(Math.random() * números.length);
-  let número = números[númeroRandom];
+  let número = changeValiu(números[númeroRandom]);
   númeroCentral.innerHTML = número;
 
   let paloInferior = document.createElement("div");
@@ -83,60 +96,81 @@ botónDraw.addEventListener("click", generaInputCartas);
 /* cartasDesordenadas = generarCartas(); */
 let botonSort = document.querySelector("#sort");
 function ordenaCartas() {
-  let cartasOrdenadas = document.querySelector("#cartas-ordenadas");
   const len = cartasDesordenadas.length;
-  cartasOrdenadas.innerHTML = "";
   console.log("ordenar", len, "cartas repartidas");
+  let cartasOrdenadas = document.querySelector("#cartas-ordenadas");
+
   for (let i = 0; i < len - 1; i++) {
     for (let j = 0; j < len - 1; j++) {
+      let contenedor = document.createElement("div");
+
+      contenedor.classList.add("d-flex");
+
       if (cartasDesordenadas[j].número > cartasDesordenadas[j + 1].número) {
         const temp = cartasDesordenadas[j];
         cartasDesordenadas[j] = cartasDesordenadas[j + 1];
         cartasDesordenadas[j + 1] = temp;
       }
-    }
+      for (let x = 0; x < len; x++) {
+        let cartaEnOrden = document.createElement("div");
+        cartaEnOrden.classList.add("card");
 
-    let contenedor = document.querySelector("#div");
+        let cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
 
-    for (let x = 0; x < len; x++) {
-      let cartaEnOrden = document.createElement("div");
-      cartaEnOrden.classList.add("card");
+        let paloSuperior = document.createElement("div");
+        paloSuperior.classList.add("position-absolute", "top-0", "start-0");
+        paloSuperior.innerHTML = cartasDesordenadas[x].palo;
 
-      let cardBody = document.createElement("div");
-      cardBody.classList.add("card-body");
+        let númeroCentral = document.createElement("div");
+        númeroCentral.innerHTML = changeValiu(cartasDesordenadas[x].número);
 
-      let paloSuperior = document.createElement("div");
-      paloSuperior.classList.add("position-absolute", "top-0", "start-0");
-      paloSuperior.innerHTML = cartasDesordenadas[x].palo;
+        let paloInferior = document.createElement("div");
+        paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
+        paloInferior.innerHTML = cartasDesordenadas[x].palo;
 
-      let númeroCentral = document.createElement("div");
-      númeroCentral.innerHTML = cartasDesordenadas[x].número;
+        contenedor.appendChild(cartaEnOrden);
+        cartaEnOrden.appendChild(cardBody);
+        cardBody.appendChild(paloSuperior);
+        cardBody.appendChild(númeroCentral);
+        cardBody.appendChild(paloInferior);
 
-      let paloInferior = document.createElement("div");
-      paloInferior.classList.add("position-absolute", "bottom-0", "end-0");
-      paloInferior.innerHTML = cartasDesordenadas[x].palo;
-
-      cartasOrdenadas.appendChild(cartaEnOrden);
-      cartaEnOrden.appendChild(cardBody);
-      cardBody.appendChild(paloSuperior);
-      cardBody.appendChild(númeroCentral);
-      cardBody.appendChild(paloInferior);
-
-      if (
-        cartasDesordenadas[x].palo == "♦" ||
-        cartasDesordenadas[x].palo == "♥"
-      ) {
-        paloSuperior.style.color = "red";
-        paloInferior.style.color = "red";
-        númeroCentral.style.color = "red";
-      } else {
-        paloSuperior.style.color = "black";
-        paloInferior.style.color = "black";
-        númeroCentral.style.color = "black";
+        if (
+          cartasDesordenadas[x].palo == "♦" ||
+          cartasDesordenadas[x].palo == "♥"
+        ) {
+          paloSuperior.style.color = "red";
+          paloInferior.style.color = "red";
+          númeroCentral.style.color = "red";
+        } else {
+          paloSuperior.style.color = "black";
+          paloInferior.style.color = "black";
+          númeroCentral.style.color = "black";
+        }
       }
+      cartasOrdenadas.appendChild(contenedor);
     }
+
+    /*let contenedor = document.createElement("div");
+    contenedor.style.display = "flex";*/
   }
   console.log("cartas ordenadas", cartasDesordenadas);
+}
+
+function changeValiu(value) {
+  switch (value) {
+    case "1":
+      return "A";
+    case "11":
+      return "J";
+    case "12":
+      return "Q";
+    case "13":
+      return "K";
+
+    default:
+      return value;
+  }
 }
 
 botonSort.addEventListener("click", ordenaCartas);
